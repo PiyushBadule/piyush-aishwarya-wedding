@@ -29,7 +29,7 @@
 
       --glass-surface: rgba(255, 255, 255, 0.88);
       --glass-border: rgba(197, 155, 56, 0.45);
-      --shadow-royal: 0 20px 45px rgba(133, 95, 20, 0.12), 0 6px 18px rgba(0, 0, 0, 0.05);
+      --shadow-royal: 0 20px 45px rgba(133, 95, 20, 0.12), 0 8px 24px rgba(0, 0, 0, 0.05);
     }
 
     * {
@@ -58,6 +58,56 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* -------------------------------------------------------------
+     * FONT ANIMATION SUITE (GOLD SHIMMER, PULSE, AND FLOATS)
+     * ------------------------------------------------------------- */
+    @keyframes goldShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes softGlowText {
+      0% { text-shadow: 0 0 6px rgba(197, 155, 56, 0.2); }
+      50% { text-shadow: 0 0 20px rgba(197, 155, 56, 0.55), 0 0 35px rgba(236, 200, 112, 0.4); }
+      100% { text-shadow: 0 0 6px rgba(197, 155, 56, 0.2); }
+    }
+
+    @keyframes pulseAmpersand {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(2deg); filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.65)); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes letterFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+      100% { transform: translateY(0); }
+    }
+
+    .shimmer-text {
+      background: linear-gradient(90deg, #855F14 0%, #ECC870 25%, #FFF6DF 50%, #D4AF37 75%, #855F14 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+      display: inline-block;
+    }
+
+    .animated-ampersand {
+      display: inline-block;
+      animation: pulseAmpersand 3.8s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    .glow-header {
+      animation: softGlowText 4s ease-in-out infinite;
+    }
+
+    .floating-eyebrow {
+      animation: letterFloat 3.2s ease-in-out infinite alternate;
+      display: inline-block;
     }
 
     .royal-heading {
@@ -188,7 +238,7 @@
       height: auto;
       filter: drop-shadow(0 0 25px rgba(226, 201, 141, 0.7));
       animation: floatGanesh 3.6s ease-in-out infinite alternate;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     @keyframes floatGanesh {
@@ -199,7 +249,6 @@
     .ganesh-shlok {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.4rem, 4.5vw, 2.1rem);
-      color: #E6C887;
       letter-spacing: 1.5px;
       margin-bottom: 8px;
       font-weight: 600;
@@ -211,7 +260,7 @@
       color: #CAD5CF;
       text-transform: uppercase;
       letter-spacing: 3px;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
 
     .btn-palace-gate {
@@ -273,7 +322,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Container System: Adapts to Ultra-wide and Mobile without excessive gutters */
+    /* Fluid Responsive Container */
     .container {
       width: 100%;
       max-width: min(920px, 92vw);
@@ -326,7 +375,6 @@
       line-height: 1.15;
       margin-bottom: 8px;
       color: var(--text-royal);
-      text-shadow: 0 4px 18px rgba(197, 155, 56, 0.18);
     }
 
     .couple-ampersand {
@@ -335,7 +383,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       vertical-align: middle;
-      display: inline-block;
       margin: 0 6px;
     }
 
@@ -489,11 +536,10 @@
       gap: clamp(30px, 5vw, 45px);
     }
 
-    /* MOBILE-SAFE GPU ACCELERATED TRANSITIONS (No 3D Perspective bugs) */
     .anim-fade-up {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
 
@@ -821,7 +867,7 @@
       margin-bottom: 4px;
     }
 
-    /* ADAPTIVE BREAKPOINTS FOR ALL PHONE SIZES */
+    /* Adaptive Mobile Breakpoints */
     @media (max-width: 820px) {
       .event-card {
         grid-template-columns: 1fr;
@@ -873,7 +919,7 @@
   <canvas id="touch-canvas"></canvas>
 
   <!-- Ganesh Opening Curtain -->
-  <div id="ganesh-curtain">
+  <div id="ganesh-curtain" onclick="handleCurtainTap()">
     <svg class="shri-ganesh-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M50 8C43 8 38 12 37 17C32 17 28 20 28 25C28 32 35 36 39 37C37 41 36 46 36 51C36 62 43 72 50 72C57 72 64 62 64 51C64 46 63 41 61 37C65 36 72 32 72 25C72 20 68 17 63 17C62 12 57 8 50 8Z" stroke="#E6C887" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M50 25C47 25 45 28 45 32C45 42 55 42 55 52C55 57 52 61 50 61C48 61 46 59 46 57" stroke="#E6C887" stroke-width="2.2" stroke-linecap="round"/>
@@ -882,14 +928,15 @@
       <path d="M42 85C42 81 58 81 58 85" stroke="#E6C887" stroke-width="2" stroke-linecap="round"/>
     </svg>
 
-    <div class="ganesh-shlok">॥ श्री गणेशाय नमः ॥</div>
-    <div class="shlok-subtext">Vakratunda Mahakaya Suryakoti Samaprabha</div>
-    <button class="btn-palace-gate" onclick="openWeddingInvitation()">Open Invitation ✨</button>
+    <div class="ganesh-shlok shimmer-text">॥ श्री गणेशाय नमः ॥</div>
+    <div class="shlok-subtext floating-eyebrow">Vakratunda Mahakaya Suryakoti Samaprabha</div>
+    <button class="btn-palace-gate" type="button" onclick="handleCurtainTap(); event.stopPropagation();">Open Invitation ✨</button>
   </div>
 
-  <!-- Audio Element -->
-  <audio id="wedding-music" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/11/06/audio_012e52b2f6.mp3?filename=indian-wedding-traditional-music-125438.mp3" type="audio/mpeg" />
+  <!-- Audio Element with High-Availability CORS Shehnai Audio -->
+  <audio id="wedding-music" loop playsinline webkit-playsinline preload="auto">
+    <source src="song.mp3" type="audio/mpeg" />
+    <source src="https://raw.githubusercontent.com/the-wedding-assets/audio/main/shehnai-traditional.mp3" type="audio/mpeg" />
   </audio>
 
   <button class="music-btn" id="music-toggle" title="Toggle Shehnai Music">
@@ -920,17 +967,19 @@
       </svg>
     </div>
 
-    <div class="hero-eyebrow royal-tag">The Auspicious Wedding of</div>
-    <h1 class="couple-title-script royal-heading">Piyush <span class="couple-ampersand calligraphy-italianno">&</span> Aishwarya</h1>
+    <div class="hero-eyebrow royal-tag floating-eyebrow">The Auspicious Wedding of</div>
+    <h1 class="couple-title-script royal-heading glow-header">
+      Piyush <span class="couple-ampersand calligraphy-italianno animated-ampersand">&</span> Aishwarya
+    </h1>
     <div class="hero-tagline">Together with their families invite you to celebrate their union</div>
 
     <!-- Scratch The Date Card -->
     <div class="scratch-wrapper">
-      <div class="scratch-tip royal-tag">✨ Scratch to reveal wedding date ✨</div>
+      <div class="scratch-tip royal-tag floating-eyebrow">✨ Scratch to reveal wedding date ✨</div>
       <div class="scratch-container">
         <div class="scratch-secret">
           <h4 class="royal-tag">Save The Auspicious Date</h4>
-          <div class="date-reveal royal-heading">5th December</div>
+          <div class="date-reveal royal-heading shimmer-text">5th December</div>
           <div class="venue-reveal">Two Sister Farm And Resort, Nagpur</div>
         </div>
         <canvas id="scratch-canvas" width="330" height="165"></canvas>
@@ -940,22 +989,22 @@
     <!-- Countdown Ribbon -->
     <div class="countdown-ribbon" id="countdown">
       <div class="orb-unit">
-        <span class="orb-val royal-heading" id="days">00</span>
+        <span class="orb-val royal-heading shimmer-text" id="days">00</span>
         <span class="orb-lbl royal-tag">Days</span>
       </div>
       <div class="orb-separator">:</div>
       <div class="orb-unit">
-        <span class="orb-val royal-heading" id="hours">00</span>
+        <span class="orb-val royal-heading shimmer-text" id="hours">00</span>
         <span class="orb-lbl royal-tag">Hours</span>
       </div>
       <div class="orb-separator">:</div>
       <div class="orb-unit">
-        <span class="orb-val royal-heading" id="mins">00</span>
+        <span class="orb-val royal-heading shimmer-text" id="mins">00</span>
         <span class="orb-lbl royal-tag">Mins</span>
       </div>
       <div class="orb-separator">:</div>
       <div class="orb-unit">
-        <span class="orb-val royal-heading" id="secs">00</span>
+        <span class="orb-val royal-heading shimmer-text" id="secs">00</span>
         <span class="orb-lbl royal-tag">Secs</span>
       </div>
     </div>
@@ -965,8 +1014,8 @@
     <!-- Itinerary Section -->
     <section>
       <div class="section-title anim-fade-up">
-        <p class="royal-tag">Auspicious Timings</p>
-        <h2 class="royal-heading">Celebration Itinerary</h2>
+        <p class="royal-tag floating-eyebrow">Auspicious Timings</p>
+        <h2 class="royal-heading glow-header">Celebration Itinerary</h2>
       </div>
 
       <div class="events-stack">
@@ -976,13 +1025,13 @@
             <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80" alt="Engagement Ceremony Diamond Rings" />
             <div class="arch-gradient"></div>
             <div class="floating-time-pill">
-              <div class="pill-time royal-heading">10:00 AM</div>
+              <div class="pill-time royal-heading shimmer-text">10:00 AM</div>
               <div class="pill-period royal-tag">Dec 5 • Morning</div>
             </div>
           </div>
           <div class="event-body">
-            <div class="event-eyebrow royal-tag">The Golden Beginning</div>
-            <h3 class="event-title-calligraphic royal-heading">Engagement Ceremony</h3>
+            <div class="event-eyebrow royal-tag floating-eyebrow">The Golden Beginning</div>
+            <h3 class="event-title-calligraphic royal-heading glow-header">Engagement Ceremony</h3>
             <p class="event-desc">
               A quiet promise in front of our parents, a ring on our fingers, and a new family to call our own. As we hold hands today, our shared journey begins with the love and blessings of everyone who matters most.
             </p>
@@ -996,13 +1045,13 @@
             <img src="haldi.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1601055283742-8b27e81b5553?auto=format&fit=crop&w=1200&q=80';" alt="Carnival Haldi Stage with Lotus Urlis and Draped Canopy"[cite: 1] />
             <div class="arch-gradient"></div>
             <div class="floating-time-pill">
-              <div class="pill-time royal-heading" style="color: #945300;">01:00 PM</div>
+              <div class="pill-time royal-heading shimmer-text" style="color: #945300;">01:00 PM</div>
               <div class="pill-period royal-tag">Dec 5 • Afternoon</div>
             </div>
           </div>
           <div class="event-body">
-            <div class="event-eyebrow royal-tag" style="color: #D96B27;">🎉 Festive Carnival & Turmeric Rites</div>
-            <h3 class="event-title-calligraphic royal-heading">Carnival Haldi</h3>
+            <div class="event-eyebrow royal-tag floating-eyebrow" style="color: #D96B27;">🎉 Festive Carnival & Turmeric Rites</div>
+            <h3 class="event-title-calligraphic royal-heading glow-header">Carnival Haldi</h3>
             <p class="event-desc">
               Dipped in golden turmeric, showered with petals, and surrounded by pure laughter. It is our family’s warmth, playful teasing, and sweet prayers wrapping us in love before our big step.
             </p>
@@ -1016,13 +1065,13 @@
             <img src="Varmala-Ceremony-1024x683.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80';" alt="Royal Varmala Garland Exchange Under Flower Shower Mandap"[cite: 2] />
             <div class="arch-gradient"></div>
             <div class="floating-time-pill">
-              <div class="pill-time royal-heading">06:55 PM</div>
+              <div class="pill-time royal-heading shimmer-text">06:55 PM</div>
               <div class="pill-period royal-tag">Dec 5 • Evening</div>
             </div>
           </div>
           <div class="event-body">
-            <div class="event-eyebrow royal-tag">The Holy Saat Phere</div>
-            <h3 class="event-title-calligraphic royal-heading">Shubh Vivah</h3>
+            <div class="event-eyebrow royal-tag floating-eyebrow">The Holy Saat Phere</div>
+            <h3 class="event-title-calligraphic royal-heading glow-header">Shubh Vivah</h3>
             <p class="event-desc">
               Exchanging the varmala with a smile, taking seven sacred rounds together around the holy fire, and tying our lives into one forever. With our elders' blessings, two souls become one family today.
             </p>
@@ -1035,16 +1084,16 @@
     <!-- Family Section -->
     <section>
       <div class="section-title anim-fade-up">
-        <p class="royal-tag">With Deep Affection & Blessings</p>
-        <h2 class="royal-heading">Our Families</h2>
+        <p class="royal-tag floating-eyebrow">With Deep Affection & Blessings</p>
+        <h2 class="royal-heading glow-header">Our Families</h2>
       </div>
 
       <div class="families-royal-wrap">
         <!-- Groom Family -->
         <div class="family-royal-card anim-fade-up">
-          <div class="family-crest-mini royal-heading">B</div>
-          <h3 class="family-title-calligraphic royal-heading">Badule Family</h3>
-          <div class="side-subtitle royal-tag">Groom's Side</div>
+          <div class="family-crest-mini royal-heading shimmer-text">B</div>
+          <h3 class="family-title-calligraphic royal-heading glow-header">Badule Family</h3>
+          <div class="side-subtitle royal-tag floating-eyebrow">Groom's Side</div>
 
           <div class="pillar-box">
             <div class="label royal-tag">Guiding Pillars (Parents)</div>
@@ -1063,15 +1112,15 @@
         <!-- Union Column -->
         <div class="central-union-column">
           <div class="union-line"></div>
-          <div class="union-emblem">❦</div>
+          <div class="union-emblem animated-ampersand">❦</div>
           <div class="union-line"></div>
         </div>
 
         <!-- Bride Family -->
         <div class="family-royal-card anim-fade-up">
-          <div class="family-crest-mini royal-heading">K</div>
-          <h3 class="family-title-calligraphic royal-heading">Kale Family</h3>
-          <div class="side-subtitle royal-tag">Bride's Side</div>
+          <div class="family-crest-mini royal-heading shimmer-text">K</div>
+          <h3 class="family-title-calligraphic royal-heading glow-header">Kale Family</h3>
+          <div class="side-subtitle royal-tag floating-eyebrow">Bride's Side</div>
 
           <div class="pillar-box">
             <div class="label royal-tag">Guiding Pillars (Parents)</div>
@@ -1092,13 +1141,13 @@
     <!-- Venue Section -->
     <section>
       <div class="section-title anim-fade-up">
-        <p class="royal-tag">Destination</p>
-        <h2 class="royal-heading">Wedding Venue</h2>
+        <p class="royal-tag floating-eyebrow">Destination</p>
+        <h2 class="royal-heading glow-header">Wedding Venue</h2>
       </div>
 
       <div class="venue-center-wrap">
         <div class="loc-card-featured anim-fade-up">
-          <h3 class="royal-heading">Two Sister Farm And Resort</h3>
+          <h3 class="royal-heading shimmer-text">Two Sister Farm And Resort</h3>
           <p>
             Nagpur, Maharashtra<br />
             <em>(Venue for Engagement, Carnival Haldi, and Marriage Ceremony)</em>
@@ -1112,19 +1161,18 @@
   </main>
 
   <footer>
-    <div class="footer-couple-script royal-heading">Piyush & Aishwarya</div>
+    <div class="footer-couple-script royal-heading glow-header">Piyush & Aishwarya</div>
     <p class="royal-subheading">We look forward to celebrating with you!</p>
   </footer>
 
-  <!-- High-DPI Canvas & Mobile-Safe Interaction Engine -->
   <script>
-    /* 1. Device Pixel Ratio (DPR) scaled Canvas for QHD+ Flagship Displays */
+    /* 1. Device Pixel Ratio Scaled Particle Canvas */
     const ambientCanvas = document.getElementById("ambient-canvas");
     const aCtx = ambientCanvas.getContext("2d");
     let celestialParticles = [];
 
     function resizeAmbient() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2x for smooth 120Hz performance
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       ambientCanvas.width = window.innerWidth * dpr;
       ambientCanvas.height = window.innerHeight * dpr;
       aCtx.scale(dpr, dpr);
@@ -1179,30 +1227,31 @@
     }
     renderAmbient();
 
-    /* 2. Audio Controller & Mobile Gesture Unmute */
+    /* 2. Direct Click-to-Play Audio Engine */
     const audio = document.getElementById("wedding-music");
     const musicBtn = document.getElementById("music-toggle");
     let isPlaying = false;
 
-    function playAudioSafely() {
-      if (!isPlaying) {
-        audio.play().then(() => {
+    function triggerAudioPlayback() {
+      if (!audio) return;
+      audio.volume = 1.0;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
           isPlaying = true;
           musicBtn.classList.add("playing");
-        }).catch(() => {});
+        }).catch((err) => {
+          console.warn("Playback error:", err);
+        });
       }
     }
 
-    const initialEvents = ["touchstart", "pointerdown", "click"];
-    initialEvents.forEach(evt => {
-      window.addEventListener(evt, playAudioSafely, { once: true, passive: true });
-    });
+    // Starts music immediately and unrolls curtain upon clicking anywhere on the curtain or the button
+    function handleCurtainTap() {
+      triggerAudioPlayback();
 
-    function openWeddingInvitation() {
       const curtain = document.getElementById("ganesh-curtain");
       curtain.classList.add("curtain-opened");
-
-      playAudioSafely();
 
       confetti({
         particleCount: 85,
@@ -1219,13 +1268,11 @@
         musicBtn.classList.remove("playing");
         isPlaying = false;
       } else {
-        audio.play();
-        musicBtn.classList.add("playing");
-        isPlaying = true;
+        triggerAudioPlayback();
       }
     });
 
-    /* 3. Touch Sparkles Trail */
+    /* 3. Touch Sparkles */
     const touchCanvas = document.getElementById("touch-canvas");
     const tCtx = touchCanvas.getContext("2d");
     let touchParticles = [];
@@ -1289,7 +1336,7 @@
     }
     renderSparkles();
 
-    /* 4. Touch-Accurate Scratch Card */
+    /* 4. Touch Scratch Card */
     const scratchCanvas = document.getElementById("scratch-canvas");
     const sCtx = scratchCanvas.getContext("2d");
     let isDrawing = false;
@@ -1375,7 +1422,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    /* 6. Robust Mobile Intersection Observer (Works reliably on Android/Chrome/OneUI) */
+    /* 6. Intersection Observer for Scroll Entries */
     const animObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
