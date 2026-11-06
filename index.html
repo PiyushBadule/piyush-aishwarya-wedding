@@ -11,11 +11,11 @@
   <meta property="og:description" content="Together with our families, we invite you to celebrate our wedding on 5th December 2026 at Two Sister Farm And Resort, Nagpur. Tap to open the invitation." />
   <!-- Replace the domain below with your live GitHub Pages link -->
   <meta property="og:url" content="https://piyushbadule.github.io/piyush-aishwarya-shaadi/" />
-  <meta property="og:image" content="https://piyushbadule.github.io/piyush-aishwarya-shaadi/Varmala-Ceremony-1024x683.png" />
-  <meta property="og:image:secure_url" content="https://piyushbadule.github.io/piyush-aishwarya-shaadi/Varmala-Ceremony-1024x683.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="1024" />
-  <meta property="og:image:height" content="683" />
+  <meta property="og:image" content="https://piyushbadule.github.io/piyush-aishwarya-shaadi/preview.jpg" />
+  <meta property="og:image:secure_url" content="https://piyushbadule.github.io/piyush-aishwarya-shaadi/preview.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Typography Suite -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1054,7 +1054,7 @@
         <!-- 2. Carnival Haldi -->
         <div class="event-card event-sunshine anim-fade-up">
           <div class="arch-frame">
-            <img src="haldi.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1601055283742-8b27e81b5553?auto=format&fit=crop&w=1200&q=80';" alt="Carnival Haldi Stage with Lotus Urlis and Draped Canopy"[cite: 1] />
+            <img src="haldi.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1601055283742-8b27e81b5553?auto=format&fit=crop&w=1200&q=80';" alt="Carnival Haldi Stage with Lotus Urlis and Draped Canopy" />
             <div class="arch-gradient"></div>
             <div class="floating-time-pill">
               <div class="pill-time royal-heading shimmer-text" style="color: #945300;">01:00 PM</div>
@@ -1074,7 +1074,7 @@
         <!-- 3. Shubh Vivah -->
         <div class="event-card event-emerald anim-fade-up">
           <div class="arch-frame">
-            <img src="Varmala-Ceremony-1024x683.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80';" alt="Royal Varmala Garland Exchange Under Flower Shower Mandap"[cite: 2] />
+            <img src="Varmala-Ceremony-1024x683.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80';" alt="Royal Varmala Garland Exchange Under Flower Shower Mandap" />
             <div class="arch-gradient"></div>
             <div class="floating-time-pill">
               <div class="pill-time royal-heading shimmer-text">06:55 PM</div>
@@ -1377,7 +1377,7 @@
       if (!isDrawing || revealed) return;
       const rect = scratchCanvas.getBoundingClientRect();
       const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-      const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+      clientY = e.clientY || (e.touches && e.touches[0].clientY);
 
       const x = clientX - rect.left;
       const y = clientY - rect.top;
